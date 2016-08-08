@@ -13,8 +13,8 @@ Utility to deploy app to EB
 Assumptions
 --------
 
-* The AWS ElasticBeanstalk (EB) command-line tool is installed on system (where this utility is used)
-* This utility is ran in an application directory that uses Git (.git folder must be present)
+* The AWS ElasticBeanstalk (EB) command-line tool ()awsebcli) is installed on system (where this utility is used)
+* This utility is run in an application directory that uses Git (.git folder must be present)
 * At least one Git commit has been made and a tag (for EB app versioning)
 
         - [example]: git tag -a 1.7 -m "test tagging"
