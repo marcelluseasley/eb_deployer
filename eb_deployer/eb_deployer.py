@@ -22,8 +22,6 @@ solution_stack = '64bit Amazon Linux 2016.03 v2.1.3 running Python 2.7'
 application_path = 'manheim_hello_world_app/application.py'
 
 
-
-
 # test if there is a .git folder; if not, then there is no repo, so exit
 if not os.path.exists(git_directory):
     print("\n==>Cannot create Elastic Beanstalk app.")
@@ -48,7 +46,7 @@ def create_eb_environment():
     """
     Create an environment for the application.
     This is where the scaling options are set (up to 3 instances),
-    based on CPU utilization.    
+    based on CPU utilization.
     """
     creation_response = client.create_environment(
         ApplicationName=app_name,
@@ -195,7 +193,7 @@ def initialize_app():
     """This function initializes the current directory for Elastic Beanstalk"""
 
     print("Initializing app (current directory) for Elastic Beanstalk...")
-    proc = Popen('eb init --region="us-east-1" -p python {}'.format(app_name), 
+    proc = Popen('eb init --region="us-east-1" -p python {}'.format(app_name),
                  shell=True, stdin=PIPE, stdout=PIPE)
 
     resp, err = proc.communicate()
@@ -206,14 +204,18 @@ def initialize_app():
 
 
 def deploy_app():
-    """This function deploys the current directory to the Elastic Beanstalk environment"""
+    """This function deploys the current directory
+    to the Elastic Beanstalk environment
+    """
 
     print("Deploying app (current directory) to Elastic Beanstalk...")
-    proc = Popen('eb deploy --label {} {}'.format(get_latest_tag(), environment_name), 
+    proc = Popen('eb deploy --label {} {}'.format(
+                 get_latest_tag(), environment_name),
                  shell=True, stdin=PIPE, stdout=PIPE)
     resp, err = proc.communicate()
     if err is not None:
-        print("\n==>Error deploying app {} to environment {}.\n==>{}\n".format(app_name, environment_name, err))
+        print("\n==>Error deploying app {} to environment {}.\n==>{}\n".format(
+              app_name, environment_name, err))
         exit(1)
     print(resp)
     print("Done.")
@@ -223,21 +225,18 @@ def main():
     if not os.path.exists(eb_directory):
         initialize_app()
     else:
-        print("Directory already initialized for Elastic Beanstalk. Skipping...")
+        print("Directory already initialized for Elastic Beanstalk. Skipping.")
 
-
-    # check if environment has already been created. If so, skip create environment
+    # check if environment has already been created. If so, skip creation
     response = client.describe_environments(
             EnvironmentNames=[
                 environment_name,
             ]
         )
 
-
     if len(response['Environments']) == 0:
         print('==> Creating environment {}'.format(environment_name))
-        retval = create_eb_environment()
-
+        create_eb_environment()
 
     # wait for environment ready state before deploying
     environment_ready = False
@@ -252,7 +251,8 @@ def main():
             exit(1)
         env_status = response['Environments'][0]['Status']
         if env_status == 'Terminated':
-            print('\n==>Environment is in terminated state. It could be visible up to an hour.\n')
+            print('\n==>Environment is in terminated state. \
+                  It could be visible up to an hour.\n')
             exit(1)
 
         if env_status != 'Ready':
@@ -264,7 +264,6 @@ def main():
             environment_ready = True
 
     print("Environment ready.")
-
 
     deploy_app()
 
