@@ -31,5 +31,5 @@ Usage
 it can be deployed to AWS ElasticBeanstalk.
 
 * Subsequent calls to "eb_deploy" will upload to EB instantly with a rolling deployment of 50%.
-* Application will can be scaled up to 3 EC2 instances if CPU utilization reaches 85% and will be scaled down if CPU utilization reaches 25%.
+* Application will be scaled up to 3 EC2 instances if CPU utilization reaches 85% and will be scaled down if CPU utilization reaches 25%.
 
