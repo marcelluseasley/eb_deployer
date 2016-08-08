@@ -4,14 +4,6 @@ eb_deployer
 
 
 
-.. image:: https://img.shields.io/travis/marcelluseasley/eb_deployer.svg
-        :target: https://travis-ci.org/marcelluseasley/eb_deployer
-
-.. image:: https://pyup.io/repos/github/marcelluseasley/eb_deployer/shield.svg
-     :target: https://pyup.io/repos/github/marcelluseasley/eb_deployer/
-     :alt: Updates
-
-
 Utility to deploy app to EB
 
 
