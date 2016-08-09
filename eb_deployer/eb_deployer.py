@@ -19,7 +19,7 @@ app_name = current_directory.split('/')[-1]
 environment_name = (app_name.replace('_', '-'))
 solution_stack = '64bit Amazon Linux 2016.03 v2.1.3 running Python 2.7'
 
-application_path = 'manheim_hello_world_app/application.py'
+application_path = current_directory + '/application.py'
 
 
 # test if there is a .git folder; if not, then there is no repo, so exit
